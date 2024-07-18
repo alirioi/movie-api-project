@@ -3,17 +3,139 @@
   --secondary-color: #6bfcfc;
   --bg-color: #060606;
   --white: #fdfcfb;
-  --color6: #1b1817;
-  --color5: #292927;
-  --color4: #2d2927
-  --color3: #5e5957
-  --color2: #8c8c8c
-  --color1: #e8e8e8;
+  --dark-grey2: #1b1817;
+  --dark-grey1: #292927;
+  --medium-gray2: #2d2927;
+  --medium-grey1: #5e5957;
+  --light-grey2: #8c8c8c;
+  --light-grey1: #e8e8e8;
 }
 
 * {
   box-sizing: border-box;
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--white);
+}
+
+h1 {
+  font-weight: regular;
+  margin: 8px;
+  font-size: 22px;
+}
+
+h2 {
+  font-weight: regular;
+  margin: 8px;
+  font-size: 20px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.header-searchForm {
+  align-items: center;
+  display: flex;
+  gap: 0px;
+  justify-content: center;
+  width: 100%;
+  & input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-color: var(--dark-grey2);
+    color: var(--white);
+  }
+
+  & input::placeholder {
+    background-color: var(--dark-grey2);
+    color: var(--light-grey2);
+  }
+
+  & button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background-color: var(--dark-grey2);
+    padding: 10px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.trendingPreview-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.trendingPreview-button {
+  background-color: var(--bg-color);
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  color: var(--white);
+  font-size: 14px;
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.trendingPreview-button:active {
+  background-color: var(--dark-grey2);
+}
+
+.trendingPreview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  width: 100%;
+}
+
+.movie-container,
+.movie-img {
+  height: 225px;
+  min-height: 225px;
+  max-height: 225px;
+  width: 150px;
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.trendingPreview-movieList {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.movie-container {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.movie-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

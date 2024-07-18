@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,10 +11,60 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
       rel="stylesheet"
     />
-    <title>Movie APP</title>
+    <title>Movies APP</title>
   </head>
   <body>
-    <h1>Movie APP</h1>
+    <header>
+      <span class="header-arrow inactive">&lt;</span>
+      <h1 class="header-title">Movies APP</h1>
+      <h2 class="header-title header-title--categoryView inactive">Acción</h2>
+
+      <form id="searchForm" class="header-searchForm">
+        <button>
+          <img src="./styles/icons/search.svg" alt="search" />
+        </button>
+        <input
+          type="text"
+          placeholder="Películas, series y otros"
+          id="searchInput"
+        />
+      </form>
+    </header>
+
+    <section id="trendingPreview" class="trendingPreview-container">
+      <div class="trendingPreview-header">
+        <h2 class="trendingPreview-title">Tendencias</h2>
+        <button class="trendingPreview-button">Ver más</button>
+      </div>
+
+      <article class="trendingPreview-movieList">
+        <div class="movie-container">
+          <img
+          src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+          alt="movie-1" class="movie-img" alt=""Nombre de la película">
+        </div>
+        <div class="movie-container">
+          <img
+          src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+          alt="movie-1" class="movie-img" alt=""Nombre de la película">
+        </div>
+        <div class="movie-container">
+          <img
+          src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+          alt="movie-1" class="movie-img" alt=""Nombre de la película">
+        </div>
+        <div class="movie-container">
+          <img
+          src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+          alt="movie-1" class="movie-img" alt=""Nombre de la película">
+        </div>
+      </article>
+    </section>
+
+    <section
+      id="categoriesPreview"
+      class="categoriesPreview-container"
+    ></section>
   </body>
   <script src="./src/secrets.js"></script>
   <script src="./src/main.js"></script>
