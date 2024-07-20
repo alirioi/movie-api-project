@@ -8,30 +8,78 @@
     <title>Movies APP</title>
   </head>
   <body>
-    <header id="header" class="header-container">
-      <span class="header-arrow inactive">&lt;</span>
-      <h1 class="header-title">Movies APP</h1>
-      <h2 class="header-title header-title--categoryView inactive">Acción</h2>
+    <main>
+      <header id="header" class="header-container">
+        <span class="header-arrow inactive">&lt;</span>
+        <h1 class="header-title">Movies APP</h1>
+        <h2 class="header-title header-title--categoryView inactive">Acción</h2>
 
-      <form id="searchForm" class="header-searchForm">
-        <button>
-          <img src="./styles/icons/search.svg" alt="search" />
-        </button>
-        <input
-          type="text"
-          placeholder="Películas, series y otros"
-          id="searchInput"
-        />
-      </form>
-    </header>
+        <form id="searchForm" class="header-searchForm">
+          <button>
+            <img src="./styles/icons/search.svg" alt="search" />
+          </button>
+          <input
+            type="text"
+            placeholder="Películas, series y otros"
+            id="searchInput"
+          />
+        </form>
+      </header>
 
-    <section id="trendingPreview" class="trendingPreview-container">
-      <div class="trendingPreview-header">
-        <h2 class="trendingPreview-title">Tendencias</h2>
-        <button class="trendingPreview-button">Ver más</button>
-      </div>
+      <section id="trendingPreview" class="trendingPreview-container">
+        <div class="trendingPreview-header">
+          <h2 class="trendingPreview-title">Tendencias</h2>
+          <button class="trendingPreview-button">Ver más</button>
+        </div>
 
-      <article class="trendingPreview-movieList">
+        <article class="trendingPreview-movieList">
+          <div class="movie-container">
+            <img
+            src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+            alt="movie-1" class="movie-img" alt=""Nombre de la película">
+          </div>
+          <div class="movie-container">
+            <img
+            src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+            alt="movie-1" class="movie-img" alt=""Nombre de la película">
+          </div>
+          <div class="movie-container">
+            <img
+            src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+            alt="movie-1" class="movie-img" alt=""Nombre de la película">
+          </div>
+        </article>
+      </section>
+
+      <section id="categoriesPreview" class="categoriesPreview-container">
+        <h2 class="categoriesPreview-title">Categorías</h2>
+
+        <article class="categoriesPreview-list">
+          <div class="category-container">
+            <h3 id="id28" class="category-title">Acción</h3>
+          </div>
+          <div class="category-container">
+            <h3 id="id28" class="category-title">Romance</h3>
+          </div>
+          <div class="category-container">
+            <h3 id="id28" class="category-title">Terror</h3>
+          </div>
+          <div class="category-container">
+            <h3 id="id28" class="category-title">Drama</h3>
+          </div>
+          <div class="category-container">
+            <h3 id="id28" class="category-title">Comedia</h3>
+          </div>
+          <div class="category-container">
+            <h3 id="id28" class="category-title">Ciencia Ficción</h3>
+          </div>
+          <div class="category-container">
+            <h3 id="id28" class="category-title">Suspenso</h3>
+          </div>
+        </article>
+      </section>
+
+      <section id="genericList" class="genericList-container inactive">
         <div class="movie-container">
           <img
           src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
@@ -47,71 +95,57 @@
           src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
           alt="movie-1" class="movie-img" alt=""Nombre de la película">
         </div>
-      </article>
-    </section>
-
-    <section id="categoriesPreview" class="categoriesPreview-container">
-      <h2 class="categoriesPreview-title">Categorías</h2>
-
-      <article class="categoriesPreview-list">
-        <div class="category-container">
-          <h3 id="id28" class="category-title">Romance</h3>
-        </div>
-        <div class="category-container">
-          <h3 id="id28" class="category-title">Romance</h3>
-        </div>
-        <div class="category-container">
-          <h3 id="id28" class="category-title">Romance</h3>
-        </div>
-        <div class="category-container">
-          <h3 id="id28" class="category-title">Romance</h3>
-        </div>
-        <div class="category-container">
-          <h3 id="id28" class="category-title">Romance</h3>
-        </div>
-        <div class="category-container">
-          <h3 id="id28" class="category-title">Romance</h3>
-        </div>
-        <div class="category-container">
-          <h3 id="id28" class="category-title">Romance</h3>
-        </div>
-        <div class="category-container">
-          <h3 id="id28" class="category-title">Romance</h3>
-        </div>
-      </article>
-    </section>
-
-    <footer>
-      <p>
-        Hecho por
-        <a href="https://github.com/alirioi" target="_blank">
-          Alirio Isea &copy; 2024
-        </a>
-      </p>
-      <div class="contact">
-        <a href="https://www.instagram.com/alirioi/" target="_blank">
+        <div class="movie-container">
           <img
-            src="./styles/icons/instagram.svg"
-            alt="instagram"
-            class="footer-icon"
-          />
-        </a>
-        <a href="https://github.com/alirioi" target="_blank">
-          <img
-            src="./styles/icons/github.svg"
-            alt="github"
-            class="footer-icon"
-          />
-        </a>
-        <a href="https://www.linkedin.com/in/alirioi/" target="_blank">
-          <img
-            src="./styles/icons/linkedin.svg"
-            alt="linkedin"
-            class="footer-icon"
-          />
-        </a>
-      </div>
-    </footer>
+          src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+          alt="movie-1" class="movie-img" alt=""Nombre de la película">
+        </div>
+      </section>
+
+      <section id="movieDetail" class="movieDetail-container inactive">
+        <h2>Nombre de la película</h2>
+        <span class="movieDetail-score">7.8</span>
+        <p class="movieDetail-despcription">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </section>
+
+      <footer>
+        <p>
+          Hecho por
+          <span> Alirio Isea &copy; 2024 </span>
+        </p>
+        <div class="contact">
+          <a href="https://www.instagram.com/alirioi/" target="_blank">
+            <img
+              src="./styles/icons/instagram.svg"
+              alt="instagram"
+              class="footer-icon"
+            />
+          </a>
+          <a href="https://github.com/alirioi" target="_blank">
+            <img
+              src="./styles/icons/github.svg"
+              alt="github"
+              class="footer-icon"
+            />
+          </a>
+          <a href="https://www.linkedin.com/in/alirioi/" target="_blank">
+            <img
+              src="./styles/icons/linkedin.svg"
+              alt="linkedin"
+              class="footer-icon"
+            />
+          </a>
+        </div>
+      </footer>
+    </main>
   </body>
   <script src="./src/secrets.js"></script>
   <script src="./src/main.js"></script>
