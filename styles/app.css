@@ -1,6 +1,7 @@
 :root {
   --primary-color: #fcb80d;
   --secondary-color: #6bfcfc;
+  --color-gradient: linear-gradient(to right, #b22902, #e56018);
   --bg-color: #060606;
   --white: #fdfcfb;
   --dark-grey2: #1b1817;
@@ -235,16 +236,14 @@ main {
 
 .category-container {
   align-items: center;
-  background-color: var(--medium-grey2);
-  border-radius: 8px;
+  background: var(--color-gradient);
+  border-radius: 20px;
   display: flex;
   justify-content: center;
-  height: 60px;
-  min-height: 60px;
-  max-height: 60px;
-  width: 100px;
-  min-width: 100px;
-  max-width: 100px;
+  height: 40px;
+  padding: 0 19px;
+  width: auto;
+  text-wrap: nowrap;
 }
 
 .category-title {
@@ -301,12 +300,6 @@ main {
   justify-content: center;
   margin: 36px 0;
   width: 100%;
-  & .category-container {
-    background-color: var(--medium-grey2);
-    border: 1px solid var(--medium-grey1);
-    height: 50px;
-    min-height: 50px;
-  }
 }
 
 .relatedMovies-container {
