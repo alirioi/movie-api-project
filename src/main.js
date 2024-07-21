@@ -9,8 +9,8 @@ const URL_IMG = 'https://image.tmdb.org/t/p/w300';
 
 async function getTrendingMoviesPreview() {
   try {
-    const response = await instance.get('/trending/movie/day');
-    const movies = response.data.results;
+    const { data, status } = await instance.get('/trending/movie/day');
+    const movies = data.results;
     movies.forEach((movie) => {
       const trendingPreviewMovieList = document.getElementsByClassName(
         'trendingPreview-movieList'
@@ -25,16 +25,33 @@ async function getTrendingMoviesPreview() {
       trendingPreviewMovieList.innerHTML += view;
     });
   } catch (error) {
+    alert(error);
+    console.log(error);
+  }
+}
+
+async function getCategoriesPreview() {
+  try {
+    const { data, status } = await instance.get(
+      '/genre/movie/list?language=es'
+    );
+    const categories = data.genres;
+    categories.forEach((category) => {
+      const categoriesPreviewList = document.getElementsByClassName(
+        'categoriesPreview-list'
+      )[0];
+      let view = `
+      <div class="category-container">
+        <h3 id="${category.id}" class="category-title">${category.name}</h3>
+      </div>
+      `;
+      categoriesPreviewList.innerHTML += view;
+    });
+  } catch (error) {
+    alert(error);
     console.log(error);
   }
 }
 
 getTrendingMoviesPreview();
-
-{
-  /* <div class="movie-container">
-            <img
-            src="https://image.tmdb.org/t/p/w300/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
-            alt="movie-1" class="movie-img" alt=""Nombre de la película">
-          </div> */
-}
+getCategoriesPreview();
