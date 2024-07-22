@@ -243,6 +243,7 @@ main {
   align-items: center;
   background: var(--color-gradient);
   border-radius: 20px;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   height: 40px;
@@ -253,7 +254,6 @@ main {
 
 .category-title {
   text-align: center;
-  cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
 }
