@@ -9,20 +9,23 @@ const URL_IMG = 'https://image.tmdb.org/t/p/w300';
 
 async function getTrendingMoviesPreview() {
   try {
-    const { data, status } = await instance.get('/trending/movie/day');
+    const { data } = await instance('/trending/movie/day');
     const movies = data.results;
     movies.forEach((movie) => {
-      const trendingPreviewMovieList = document.getElementsByClassName(
-        'trendingPreview-movieList'
-      )[0];
-      let view = `
-      <div class="movie-container">
-        <img
-          src="${URL_IMG}${movie.poster_path}"
-          alt="${movie.title}" class="movie-img">
-      </div>
-      `;
-      trendingPreviewMovieList.innerHTML += view;
+      const trendingPreviewMovieList = document.querySelector(
+        '#trendingPreview .trendingPreview-movieList'
+      );
+
+      const movieContainer = document.createElement('div');
+      movieContainer.classList.add('movie-container');
+
+      const movieImage = document.createElement('img');
+      movieImage.classList.add('movie-img');
+      movieImage.src = `${URL_IMG}${movie.poster_path}`;
+      movieImage.alt = movie.title;
+
+      movieContainer.appendChild(movieImage);
+      trendingPreviewMovieList.appendChild(movieContainer);
     });
   } catch (error) {
     alert(error);
@@ -32,20 +35,24 @@ async function getTrendingMoviesPreview() {
 
 async function getCategoriesPreview() {
   try {
-    const { data, status } = await instance.get(
-      '/genre/movie/list?language=es'
-    );
+    const { data } = await instance('/genre/movie/list?language=es');
     const categories = data.genres;
     categories.forEach((category) => {
-      const categoriesPreviewList = document.getElementsByClassName(
-        'categoriesPreview-list'
-      )[0];
-      let view = `
-      <div class="category-container">
-        <h3 id="${category.id}" class="category-title">${category.name}</h3>
-      </div>
-      `;
-      categoriesPreviewList.innerHTML += view;
+      const categoriesPreviewList = document.querySelector(
+        '#categoriesPreview .categoriesPreview-list'
+      );
+
+      const categoryContainer = document.createElement('div');
+      categoryContainer.classList.add('category-container');
+
+      const categoryTitle = document.createElement('h3');
+      categoryTitle.classList.add('category-title');
+      categoryTitle.id = category.id;
+
+      const categoryTitleText = document.createTextNode(category.name);
+      categoryTitle.appendChild(categoryTitleText);
+      categoryContainer.appendChild(categoryTitle);
+      categoriesPreviewList.appendChild(categoryContainer);
     });
   } catch (error) {
     alert(error);
