@@ -92,6 +92,8 @@ main {
 }
 
 .header-title--categoryView {
+  display: inline-block;
+  margin: 0 36px;
   font-size: 26px;
   font-weight: var(--medium);
 }
@@ -101,7 +103,6 @@ main {
   display: inline-block;
   font-weight: var(--medium);
   font-size: 36px;
-  margin-bottom: 16px;
 }
 
 .header-container--long {
