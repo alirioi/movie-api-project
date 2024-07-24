@@ -11,6 +11,8 @@ async function getTrendingMoviesPreview() {
   try {
     const { data } = await instance('/trending/movie/day');
     const movies = data.results;
+    trendingMoviesPreviewList.innerHTML = '';
+
     movies.forEach((movie) => {
       const movieContainer = document.createElement('div');
       movieContainer.classList.add('movie-container');
@@ -33,6 +35,8 @@ async function getCategoriesPreview() {
   try {
     const { data } = await instance('/genre/movie/list?language=es');
     const categories = data.genres;
+    categoriesPreviewList.innerHTML = '';
+
     categories.forEach((category) => {
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
