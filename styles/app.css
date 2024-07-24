@@ -91,10 +91,15 @@ main {
   text-align: center;
 }
 
+.header-title--categoryView {
+  font-size: 26px;
+  font-weight: var(--medium);
+}
+
 .header-arrow {
   cursor: pointer;
   display: inline-block;
-  font-weight: var(--font-weight-text2);
+  font-weight: var(--medium);
   font-size: 36px;
   margin-bottom: 16px;
 }
