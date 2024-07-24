@@ -3,6 +3,9 @@ const instance = axios.create({
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
+  params: {
+    language: 'es-MX',
+  },
 });
 
 const URL_IMG = 'https://image.tmdb.org/t/p/w300';
@@ -33,7 +36,7 @@ async function getTrendingMoviesPreview() {
 
 async function getCategoriesPreview() {
   try {
-    const { data } = await instance('/genre/movie/list?language=es');
+    const { data } = await instance('/genre/movie/list');
     const categories = data.genres;
     categoriesPreviewList.innerHTML = '';
 
@@ -44,11 +47,47 @@ async function getCategoriesPreview() {
       const categoryTitle = document.createElement('h3');
       categoryTitle.classList.add('category-title');
       categoryTitle.id = category.id;
+      categoryContainer.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+        location.hash = `#category=${category.id}-${category.name}`;
+        headerCategoryTitle.innerHTML = category.name;
+      });
 
       const categoryTitleText = document.createTextNode(category.name);
       categoryTitle.appendChild(categoryTitleText);
       categoryContainer.appendChild(categoryTitle);
       categoriesPreviewList.appendChild(categoryContainer);
+    });
+  } catch (error) {
+    alert(error);
+    console.log(error);
+  }
+}
+
+async function getMoviesByCategory(id) {
+  try {
+    const { data } = await instance('/discover/movie', {
+      params: {
+        with_genres: id,
+      },
+    });
+    const movies = data.results;
+    genericSection.innerHTML = '';
+
+    movies.forEach((movie) => {
+      const movieContainer = document.createElement('div');
+      movieContainer.classList.add('movie-container');
+
+      const movieImage = document.createElement('img');
+      movieImage.classList.add('movie-img');
+      movieImage.src = `${URL_IMG}${movie.poster_path}`;
+      movieImage.alt = movie.title;
+
+      movieContainer.appendChild(movieImage);
+      genericSection.appendChild(movieContainer);
     });
   } catch (error) {
     alert(error);
