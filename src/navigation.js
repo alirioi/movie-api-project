@@ -28,7 +28,8 @@ function navigator() {
 
 function homePage() {
   headerSection.classList.remove('header-container--long');
-  headerSection.style.background = '';
+  headerBackground.classList.add('inactive');
+  headerBackgroundImg.classList.add('inactive');
   arrowBtn.classList.add('inactive');
   headerTitle.classList.remove('inactive');
   headerCategoryTitle.classList.add('inactive');
@@ -47,7 +48,8 @@ function homePage() {
 
 function trendsPage() {
   headerSection.classList.remove('header-container--long');
-  headerSection.style.background = '';
+  headerBackground.classList.add('inactive');
+  headerBackgroundImg.classList.add('inactive');
   arrowBtn.classList.remove('inactive');
   headerTitle.classList.add('inactive');
   headerCategoryTitle.classList.remove('inactive');
@@ -64,7 +66,8 @@ function trendsPage() {
 
 function searchPage() {
   headerSection.classList.remove('header-container--long');
-  headerSection.style.background = '';
+  headerBackground.classList.add('inactive');
+  headerBackgroundImg.classList.add('inactive');
   arrowBtn.classList.remove('inactive');
   headerTitle.classList.add('inactive');
   headerCategoryTitle.classList.remove('inactive');
@@ -82,7 +85,8 @@ function searchPage() {
 
 function movieDetailsPage() {
   headerSection.classList.add('header-container--long');
-  // headerSection.style.background = '';
+  headerBackground.classList.remove('inactive');
+  headerBackgroundImg.classList.remove('inactive');
   arrowBtn.classList.remove('inactive');
   headerTitle.classList.add('inactive');
   headerCategoryTitle.classList.add('inactive');
@@ -92,11 +96,16 @@ function movieDetailsPage() {
   categoriesPreviewSection.classList.add('inactive');
   genericSection.classList.add('inactive');
   movieDetailSection.classList.remove('inactive');
+
+  const [_, movieData] = location.hash.split('=');
+  const [movieId, movieTitle] = movieData.split('-');
+  getMovieById(movieId);
 }
 
 function categoriesPage() {
   headerSection.classList.remove('header-container--long');
-  headerSection.style.background = '';
+  headerBackground.classList.add('inactive');
+  headerBackgroundImg.classList.add('inactive');
   arrowBtn.classList.remove('inactive');
   headerTitle.classList.add('inactive');
   headerCategoryTitle.classList.remove('inactive');

@@ -16,6 +16,8 @@ const relatedMoviesContainer = $('.relatedMovies-scrollContainer');
 
 //* Elements
 const headerTitle = $('.header-title');
+const headerBackground = $('.header-background');
+const headerBackgroundImg = $('.header-background-img');
 const arrowBtn = $('.header-arrow');
 const headerCategoryTitle = $('.header-title--categoryView');
 const searchFormInput = $('#searchForm input');

@@ -9,6 +9,7 @@ const instance = axios.create({
 });
 
 const URL_IMG = 'https://image.tmdb.org/t/p/w300';
+const URL_IMG_BACKGROUND = 'https://image.tmdb.org/t/p/w1280/';
 
 //Utils
 
@@ -18,6 +19,9 @@ function renderMovies(movies, container) {
     if (movie.poster_path !== null && movie.poster_path !== undefined) {
       const movieContainer = document.createElement('div');
       movieContainer.classList.add('movie-container');
+      movieContainer.addEventListener('click', () => {
+        location.hash = `#movie=${movie.id}-${movie.title}`;
+      });
 
       const movieImage = document.createElement('img');
       movieImage.classList.add('movie-img');
@@ -126,6 +130,25 @@ async function getTrendingMovies() {
     }
 
     renderMovies(movies, genericSection);
+  } catch (error) {
+    alert(error);
+    console.log(error);
+  }
+}
+
+async function getMovieById(id) {
+  try {
+    const { data: movie } = await instance(`/movie/${id}`);
+
+    headerBackgroundImg.src = `${URL_IMG_BACKGROUND}${movie.poster_path}`;
+    headerBackgroundImg.alt = movie.title;
+    movieDetailTitle.textContent = `${movie.title} (${
+      movie.release_date.split('-')[0]
+    })`;
+    movieDetailScore.textContent = parseFloat(movie.vote_average).toFixed(1);
+    movieDetailDescription.textContent = movie.overview;
+
+    renderCategories(movie.genres, movieDetailCategoriesList);
   } catch (error) {
     alert(error);
     console.log(error);
