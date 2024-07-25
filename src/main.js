@@ -10,24 +10,55 @@ const instance = axios.create({
 
 const URL_IMG = 'https://image.tmdb.org/t/p/w300';
 
+//Utils
+
+function renderMovies(movies, container) {
+  container.innerHTML = '';
+
+  movies.forEach((movie) => {
+    const movieContainer = document.createElement('div');
+    movieContainer.classList.add('movie-container');
+
+    const movieImage = document.createElement('img');
+    movieImage.classList.add('movie-img');
+    movieImage.src = `${URL_IMG}${movie.poster_path}`;
+    movieImage.alt = movie.title;
+
+    movieContainer.appendChild(movieImage);
+    container.appendChild(movieContainer);
+  });
+}
+
+function renderCategories(categories, container) {
+  container.innerHTML = '';
+
+  categories.forEach((category) => {
+    const categoryContainer = document.createElement('div');
+    categoryContainer.classList.add('category-container');
+
+    const categoryTitle = document.createElement('h3');
+    categoryTitle.classList.add('category-title');
+    categoryTitle.id = category.id;
+    categoryContainer.addEventListener('click', () => {
+      location.hash = `#category=${category.id}-${category.name}`;
+      headerCategoryTitle.innerHTML = category.name;
+    });
+
+    const categoryTitleText = document.createTextNode(category.name);
+    categoryTitle.appendChild(categoryTitleText);
+    categoryContainer.appendChild(categoryTitle);
+    container.appendChild(categoryContainer);
+  });
+}
+
+// Llamadas a la API
+
 async function getTrendingMoviesPreview() {
   try {
     const { data } = await instance('/trending/movie/day');
     const movies = data.results;
-    trendingMoviesPreviewList.innerHTML = '';
 
-    movies.forEach((movie) => {
-      const movieContainer = document.createElement('div');
-      movieContainer.classList.add('movie-container');
-
-      const movieImage = document.createElement('img');
-      movieImage.classList.add('movie-img');
-      movieImage.src = `${URL_IMG}${movie.poster_path}`;
-      movieImage.alt = movie.title;
-
-      movieContainer.appendChild(movieImage);
-      trendingMoviesPreviewList.appendChild(movieContainer);
-    });
+    renderMovies(movies, trendingMoviesPreviewList);
   } catch (error) {
     alert(error);
     console.log(error);
@@ -38,29 +69,8 @@ async function getCategoriesPreview() {
   try {
     const { data } = await instance('/genre/movie/list');
     const categories = data.genres;
-    categoriesPreviewList.innerHTML = '';
 
-    categories.forEach((category) => {
-      const categoryContainer = document.createElement('div');
-      categoryContainer.classList.add('category-container');
-
-      const categoryTitle = document.createElement('h3');
-      categoryTitle.classList.add('category-title');
-      categoryTitle.id = category.id;
-      categoryContainer.addEventListener('click', () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-        location.hash = `#category=${category.id}-${category.name}`;
-        headerCategoryTitle.innerHTML = category.name;
-      });
-
-      const categoryTitleText = document.createTextNode(category.name);
-      categoryTitle.appendChild(categoryTitleText);
-      categoryContainer.appendChild(categoryTitle);
-      categoriesPreviewList.appendChild(categoryContainer);
-    });
+    renderCategories(categories, categoriesPreviewList);
   } catch (error) {
     alert(error);
     console.log(error);
@@ -75,20 +85,8 @@ async function getMoviesByCategory(id) {
       },
     });
     const movies = data.results;
-    genericSection.innerHTML = '';
 
-    movies.forEach((movie) => {
-      const movieContainer = document.createElement('div');
-      movieContainer.classList.add('movie-container');
-
-      const movieImage = document.createElement('img');
-      movieImage.classList.add('movie-img');
-      movieImage.src = `${URL_IMG}${movie.poster_path}`;
-      movieImage.alt = movie.title;
-
-      movieContainer.appendChild(movieImage);
-      genericSection.appendChild(movieContainer);
-    });
+    renderMovies(movies, genericSection);
   } catch (error) {
     alert(error);
     console.log(error);
