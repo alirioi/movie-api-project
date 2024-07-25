@@ -54,6 +54,7 @@ body {
   justify-content: space-between;
   margin: 0 auto;
   max-width: 640px;
+  min-height: 100vh;
 }
 
 h1 {
@@ -331,6 +332,11 @@ main {
   justify-content: center;
   padding: 16px;
   width: 100%;
+  max-height: 70vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-color: var(--medium-grey2) var(--bg-color);
+  scrollbar-width: thin;
 }
 
 /* Footer */
