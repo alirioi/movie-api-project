@@ -112,3 +112,22 @@ async function getMovieBySearch(query) {
     console.log(error);
   }
 }
+
+async function getTrendingMovies() {
+  try {
+    let movies = [];
+    for (let i = 1; i <= 3; i++) {
+      const { data } = await instance('/trending/movie/day', {
+        params: {
+          page: i,
+        },
+      });
+      movies = movies.concat(data.results);
+    }
+
+    renderMovies(movies, genericSection);
+  } catch (error) {
+    alert(error);
+    console.log(error);
+  }
+}
