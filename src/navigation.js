@@ -97,8 +97,10 @@ function movieDetailsPage() {
   genericSection.classList.add('inactive');
   movieDetailSection.classList.remove('inactive');
 
+  relatedMoviesContainer.scrollLeft = 0;
+
   const [_, movieData] = location.hash.split('=');
-  const [movieId, movieTitle] = movieData.split('-');
+  const [movieId, movieTitle] = movieData.split('-').map(decodeURI);
   getMovieById(movieId);
 }
 

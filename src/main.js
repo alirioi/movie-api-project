@@ -102,7 +102,7 @@ async function getMovieBySearch(query) {
   try {
     const { data } = await instance('/search/movie', {
       params: {
-        query: query.toLowerCase(),
+        query,
       },
     });
     const movies = data.results;
@@ -142,13 +142,43 @@ async function getMovieById(id) {
 
     headerBackgroundImg.src = `${URL_IMG_BACKGROUND}${movie.poster_path}`;
     headerBackgroundImg.alt = movie.title;
-    movieDetailTitle.textContent = `${movie.title} (${
-      movie.release_date.split('-')[0]
-    })`;
+    if (
+      movie.release_date !== null &&
+      movie.release_date !== undefined &&
+      movie.release_date !== ''
+    ) {
+      movieDetailTitle.textContent = `${movie.title} (${
+        movie.release_date.split('-')[0]
+      })`;
+    } else {
+      movieDetailTitle.textContent = movie.title;
+    }
+
     movieDetailScore.textContent = parseFloat(movie.vote_average).toFixed(1);
-    movieDetailDescription.textContent = movie.overview;
+
+    if (
+      movie.overview !== null &&
+      movie.overview !== undefined &&
+      movie.overview !== ''
+    ) {
+      movieDetailDescription.textContent = movie.overview;
+    } else {
+      movieDetailDescription.textContent = 'No hay descripción disponible';
+    }
 
     renderCategories(movie.genres, movieDetailCategoriesList);
+    getRelatedMoviesId(id);
+  } catch (error) {
+    alert(error);
+    console.log(error);
+  }
+}
+
+async function getRelatedMoviesId(id) {
+  try {
+    const { data: movies } = await instance(`/movie/${id}/similar`);
+
+    renderMovies(movies.results, relatedMoviesContainer);
   } catch (error) {
     alert(error);
     console.log(error);
