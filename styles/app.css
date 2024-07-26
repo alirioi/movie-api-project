@@ -173,6 +173,10 @@ main {
     background-color: var(--dark-grey1);
   }
 
+  & input:focus {
+    outline: 1px solid var(--medium-grey1);
+  }
+
   & input::placeholder {
     background-color: var(--dark-grey2);
     color: var(--light-grey2);
@@ -184,6 +188,7 @@ main {
     border-right: 1px solid var(--medium-grey2);
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
+    cursor: pointer;
     height: 40px;
     padding: 10px;
     width: 40px;
@@ -374,18 +379,24 @@ footer {
   background-color: var(--dark-grey2);
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  padding: 10px;
   width: 100%;
 
   & p {
     color: var(--light-grey2);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: var(--regular);
   }
 
   & span {
     color: var(--secondary-color);
     font-size: var(--medium);
+  }
+
+  & a {
+    color: var(--secondary-color);
+    font-size: var(--medium);
+    text-decoration: none;
   }
 }
 
