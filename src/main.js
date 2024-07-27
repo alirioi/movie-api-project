@@ -28,7 +28,12 @@ function renderMovies(movies, container) {
       movieImage.src = `${URL_IMG}${movie.poster_path}`;
       movieImage.alt = movie.title;
 
+      const movieScore = document.createElement('div');
+      movieScore.classList.add('movie-score');
+      movieScore.textContent = parseFloat(movie.vote_average).toFixed(1);
+
       movieContainer.appendChild(movieImage);
+      movieContainer.appendChild(movieScore);
       container.appendChild(movieContainer);
     }
   });

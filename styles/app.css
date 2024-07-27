@@ -256,10 +256,27 @@ main {
 .movie-container {
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
 }
 
 .movie-img {
   object-fit: cover;
+}
+
+.movie-score {
+  background-color: var(--dark-grey2);
+  color: var(--primary-color);
+  font-weight: var(--medium);
+  font-size: 14px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 4px;
+  border-top-left-radius: 10px;
+}
+
+.movie-score::before {
+  content: '★ ';
 }
 
 /* Categories Preview */
