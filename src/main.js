@@ -143,10 +143,19 @@ async function getTrendingMovies() {
 
 async function getMovieById(id) {
   try {
-    const { data: movie } = await instance(`/movie/${id}`);
+    movieDetailTitle.classList.add('movieDetail-title--loading');
+    movieDetailDescription.classList.add('movieDetail-description--loading');
+    headerBackgroundImg.src = '';
+    headerBackgroundImg.alt = '';
+    movieDetailTitle.textContent = 'Title';
+    movieDetailDescription.textContent =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    movieDetailScore.textContent = '0';
 
+    const { data: movie } = await instance(`/movie/${id}`);
     headerBackgroundImg.src = `${URL_IMG_BACKGROUND}${movie.poster_path}`;
     headerBackgroundImg.alt = movie.title;
+
     if (
       movie.release_date !== null &&
       movie.release_date !== undefined &&
@@ -170,7 +179,8 @@ async function getMovieById(id) {
     } else {
       movieDetailDescription.textContent = 'No hay descripción disponible';
     }
-
+    movieDetailTitle.classList.remove('movieDetail-title--loading');
+    movieDetailDescription.classList.remove('movieDetail-description--loading');
     renderCategories(movie.genres, movieDetailCategoriesList);
     getRelatedMoviesId(id);
   } catch (error) {
