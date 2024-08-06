@@ -3,6 +3,7 @@
   --secondary-color: #6bfcfc;
   --color-gradient: linear-gradient(to right, #b22902, #e56018);
   --bg-color: #060606;
+  --bg-detail-movie: #06060696;
   --white: #fdfcfb;
   --dark-grey2: #1b1817;
   --dark-grey1: #292927;
@@ -149,6 +150,7 @@ main {
   z-index: -1;
   overflow: hidden;
   object-fit: cover;
+  mask-image: linear-gradient(black 80%, transparent);
 }
 
 .header-searchForm {
@@ -248,8 +250,6 @@ main {
   display: flex;
   gap: 12px;
   overflow-x: scroll;
-  scrollbar-color: var(--medium-grey2) transparent;
-  scrollbar-width: thin;
   width: 100%;
 }
 
@@ -293,8 +293,6 @@ main {
   display: flex;
   gap: 12px;
   overflow-x: scroll;
-  scrollbar-color: var(--medium-grey2) transparent;
-  scrollbar-width: thin;
   width: 100%;
 }
 
@@ -320,7 +318,7 @@ main {
 /* Movie Detail */
 
 .movieDetail-container {
-  background-color: var(--dark-grey2);
+  background-color: var(--bg-detail-movie);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   margin-top: 460px;
@@ -386,8 +384,6 @@ main {
   max-height: 70vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  scrollbar-color: var(--medium-grey2) transparent;
-  scrollbar-width: thin;
 }
 
 /* Footer */
@@ -498,5 +494,31 @@ footer {
   }
   50% {
     opacity: 0%;
+  }
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--medium-grey2);
+  border-radius: 10px;
+}
+
+/* .trendingPreview-movieList,
+.relatedMovies-scrollContainer,
+.categoriesPreview-list,
+.genericList-container {
+  scrollbar-color: var(--medium-grey2) transparent;
+  scrollbar-width: thin;
+} */
+
+@media (max-width: 640px) {
+  html {
+    background-color: none;
   }
 }
