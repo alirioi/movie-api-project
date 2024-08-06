@@ -435,7 +435,7 @@ footer {
 /* Loading */
 .movie-container--loading {
   animation: loading-skeleton infinite 1.5s;
-  background-color: var(--dark-grey2);
+  background-color: var(--medium-grey2);
 }
 
 .movie-container--loading:nth-child(2) {
@@ -472,12 +472,18 @@ footer {
 }
 
 .movieDetail-title--loading,
-.movieDetail-description--loading {
+.movieDetail-description--loading,
+.movieDetail-score--loading {
   animation: loading-skeleton infinite 1.5s;
   background-color: var(--dark-grey1);
   border-radius: 12px;
   color: transparent;
   text-align: center;
+}
+
+.movieDetail-score--loading {
+  margin-left: 24px;
+  width: 45px;
 }
 
 .movieDetail-description--loading {

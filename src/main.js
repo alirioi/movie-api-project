@@ -21,6 +21,8 @@ function renderMovies(movies, container) {
       movieContainer.classList.add('movie-container');
       movieContainer.addEventListener('click', () => {
         location.hash = `#movie=${movie.id}-${movie.title}`;
+        skeletonLoaderMovies(container);
+        skeletonLoaderCategories(movieDetailCategoriesList);
       });
 
       const movieImage = document.createElement('img');
@@ -61,6 +63,44 @@ function renderCategories(categories, container) {
   });
 }
 
+function skeletonLoaderMovies(container) {
+  container.innerHTML = '';
+  for (let i = 0; i < 4; i++) {
+    const movieContainer = document.createElement('div');
+    movieContainer.classList.add('movie-container');
+    movieContainer.classList.add('movie-container--loading');
+    container.appendChild(movieContainer);
+  }
+}
+
+function skeletonLoaderCategories(container) {
+  container.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const categoryContainer = document.createElement('div');
+    categoryContainer.classList.add('category-container');
+    categoryContainer.classList.add('category-container--loading');
+    container.appendChild(categoryContainer);
+  }
+}
+
+function skeletonLoaderMovieDetail() {
+  movieDetailTitle.classList.add('movieDetail-title--loading');
+  movieDetailScore.classList.add('movieDetail-score--loading');
+  movieDetailDescription.classList.add('movieDetail-description--loading');
+  headerBackgroundImg.src = '';
+  headerBackgroundImg.alt = '';
+  movieDetailTitle.textContent = 'Title';
+  movieDetailDescription.textContent =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+  movieDetailScore.textContent = '';
+}
+
+function skeletonLoaderMovieDetailRemove() {
+  movieDetailTitle.classList.remove('movieDetail-title--loading');
+  movieDetailScore.classList.remove('movieDetail-score--loading');
+  movieDetailDescription.classList.remove('movieDetail-description--loading');
+}
+
 // Llamadas a la API
 
 async function getTrendingMoviesPreview() {
@@ -89,6 +129,7 @@ async function getCategoriesPreview() {
 
 async function getMoviesByCategory(id) {
   try {
+    skeletonLoaderMovies(genericSection);
     const { data } = await instance('/discover/movie', {
       params: {
         with_genres: id,
@@ -143,15 +184,7 @@ async function getTrendingMovies() {
 
 async function getMovieById(id) {
   try {
-    movieDetailTitle.classList.add('movieDetail-title--loading');
-    movieDetailDescription.classList.add('movieDetail-description--loading');
-    headerBackgroundImg.src = '';
-    headerBackgroundImg.alt = '';
-    movieDetailTitle.textContent = 'Title';
-    movieDetailDescription.textContent =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-    movieDetailScore.textContent = '0';
-
+    skeletonLoaderMovieDetail();
     const { data: movie } = await instance(`/movie/${id}`);
     headerBackgroundImg.src = `${URL_IMG_BACKGROUND}${movie.poster_path}`;
     headerBackgroundImg.alt = movie.title;
@@ -179,8 +212,7 @@ async function getMovieById(id) {
     } else {
       movieDetailDescription.textContent = 'No hay descripción disponible';
     }
-    movieDetailTitle.classList.remove('movieDetail-title--loading');
-    movieDetailDescription.classList.remove('movieDetail-description--loading');
+    skeletonLoaderMovieDetailRemove();
     renderCategories(movie.genres, movieDetailCategoriesList);
     getRelatedMoviesId(id);
   } catch (error) {
@@ -191,6 +223,7 @@ async function getMovieById(id) {
 
 async function getRelatedMoviesId(id) {
   try {
+    skeletonLoaderMovies(relatedMoviesContainer);
     const { data: movies } = await instance(`/movie/${id}/similar`);
 
     renderMovies(movies.results, relatedMoviesContainer);
