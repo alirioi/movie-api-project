@@ -509,13 +509,14 @@ footer {
   border-radius: 10px;
 }
 
-/* .trendingPreview-movieList,
+.trendingPreview-movieList,
 .relatedMovies-scrollContainer,
 .categoriesPreview-list,
 .genericList-container {
-  scrollbar-color: var(--medium-grey2) transparent;
-  scrollbar-width: thin;
-} */
+  /* scrollbar-color: var(--medium-grey2) transparent;
+  scrollbar-width: thin; */
+  padding: 6px;
+}
 
 @media (max-width: 640px) {
   html {
