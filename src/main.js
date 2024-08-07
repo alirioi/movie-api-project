@@ -46,6 +46,17 @@ function renderMovies(movies, container) {
     movieImage.alt = movie.title;
     movieImage.setAttribute('data-img', `${URL_IMG}${movie.poster_path}`);
 
+    movieImage.addEventListener('error', () => {
+      movieImage.setAttribute(
+        'src',
+        `https://placehold.co/150x225/292927/292927`
+      );
+      const movieTitle = document.createElement('span');
+      movieTitle.classList.add('movie-title');
+      movieTitle.textContent = movie.title;
+      movieContainer.appendChild(movieTitle);
+    });
+
     const movieScore = document.createElement('div');
     movieScore.classList.add('movie-score');
     movieScore.textContent = parseFloat(movie.vote_average).toFixed(1);

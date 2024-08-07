@@ -60,6 +60,7 @@ body {
   margin: 0 auto;
   max-width: 640px;
   min-height: 100vh;
+  max-height: 100vh;
 }
 
 h1 {
@@ -82,13 +83,12 @@ main {
   flex-direction: column;
   gap: 18px;
   height: 100%;
-  margin-bottom: 18px;
 }
 
 /* Header */
 
 .header-container {
-  padding: 24px 16px;
+  padding: 20px 16px;
   width: 100%;
 }
 
@@ -236,7 +236,6 @@ main {
 
 .movie-container,
 .movie-img {
-  aspect-ratio: 2 / 3;
   cursor: pointer;
   height: 225px;
   min-height: 225px;
@@ -278,6 +277,17 @@ main {
 
 .movie-score::before {
   content: '★ ';
+}
+
+.movie-title {
+  color: var(--secondary-color);
+  font-weight: var(--medium);
+  left: 0;
+  padding: 0 10px;
+  position: absolute;
+  text-align: center;
+  top: 25%;
+  width: 100%;
 }
 
 /* Categories Preview */
