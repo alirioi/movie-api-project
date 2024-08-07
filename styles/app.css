@@ -551,6 +551,6 @@ footer {
 
 @media (max-width: 640px) {
   html {
-    background-color: none;
+    background-color: transparent;
   }
 }
