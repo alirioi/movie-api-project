@@ -236,6 +236,7 @@ main {
 
 .movie-container,
 .movie-img {
+  aspect-ratio: 2 / 3;
   cursor: pointer;
   height: 225px;
   min-height: 225px;
@@ -445,6 +446,15 @@ footer {
 .movie-container--loading:nth-child(4) {
   animation-delay: 0.6s;
 }
+
+.movie-container--loading:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+.movie-container--loading:nth-child(6) {
+  animation-delay: 1s;
+}
+
 .category-container--loading {
   animation: loading-skeleton infinite 1.5s;
   background: var(--color-gradient);
@@ -486,6 +496,10 @@ footer {
   animation-delay: 0.2s;
 }
 
+.fade-in {
+  animation: fade-in 2s;
+}
+
 /* Animations */
 @keyframes loading-skeleton {
   0%,
@@ -497,6 +511,14 @@ footer {
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 /* Scrollbar */
 
 ::-webkit-scrollbar {
@@ -511,8 +533,7 @@ footer {
 
 .trendingPreview-movieList,
 .relatedMovies-scrollContainer,
-.categoriesPreview-list,
-.genericList-container {
+.categoriesPreview-list {
   /* scrollbar-color: var(--medium-grey2) transparent;
   scrollbar-width: thin; */
   padding: 6px;

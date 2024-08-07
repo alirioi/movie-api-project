@@ -12,32 +12,49 @@ const URL_IMG = 'https://image.tmdb.org/t/p/w300';
 const URL_IMG_BACKGROUND = 'https://image.tmdb.org/t/p/w1280/';
 
 //Utils
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0,
+};
+
+const lazyLoader = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const url = entry.target.getAttribute('data-img');
+      entry.target.classList.add('fade-in');
+      entry.target.setAttribute('src', url);
+      observer.unobserve(entry.target);
+    }
+  });
+}, options);
 
 function renderMovies(movies, container) {
   container.innerHTML = '';
   movies.forEach((movie) => {
-    if (movie.poster_path !== null && movie.poster_path !== undefined) {
-      const movieContainer = document.createElement('div');
-      movieContainer.classList.add('movie-container');
-      movieContainer.addEventListener('click', () => {
-        location.hash = `#movie=${movie.id}-${movie.title}`;
-        skeletonLoaderMovies(container);
-        skeletonLoaderCategories(movieDetailCategoriesList);
-      });
+    const movieContainer = document.createElement('div');
+    movieContainer.classList.add('movie-container');
+    movieContainer.addEventListener('click', () => {
+      location.hash = `#movie=${movie.id}-${movie.title}`;
+      skeletonLoaderMovies(container);
+      skeletonLoaderCategories(movieDetailCategoriesList);
+    });
 
-      const movieImage = document.createElement('img');
-      movieImage.classList.add('movie-img');
-      movieImage.src = `${URL_IMG}${movie.poster_path}`;
-      movieImage.alt = movie.title;
+    const movieImage = document.createElement('img');
+    movieImage.classList.add('movie-img');
+    movieImage.src = 'https://placehold.co/150x225/060606/060606';
+    movieImage.alt = movie.title;
+    movieImage.setAttribute('data-img', `${URL_IMG}${movie.poster_path}`);
 
-      const movieScore = document.createElement('div');
-      movieScore.classList.add('movie-score');
-      movieScore.textContent = parseFloat(movie.vote_average).toFixed(1);
+    const movieScore = document.createElement('div');
+    movieScore.classList.add('movie-score');
+    movieScore.textContent = parseFloat(movie.vote_average).toFixed(1);
 
-      movieContainer.appendChild(movieImage);
-      movieContainer.appendChild(movieScore);
-      container.appendChild(movieContainer);
-    }
+    lazyLoader.observe(movieImage);
+
+    movieContainer.appendChild(movieImage);
+    movieContainer.appendChild(movieScore);
+    container.appendChild(movieContainer);
   });
 }
 
@@ -165,6 +182,7 @@ async function getMovieBySearch(query) {
 
 async function getTrendingMovies() {
   try {
+    skeletonLoaderMovies(genericSection);
     let movies = [];
     for (let i = 1; i <= 3; i++) {
       const { data } = await instance('/trending/movie/day', {
