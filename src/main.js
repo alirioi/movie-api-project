@@ -65,7 +65,7 @@ function renderCategories(categories, container) {
 
 function skeletonLoaderMovies(container) {
   container.innerHTML = '';
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i <= 5; i++) {
     const movieContainer = document.createElement('div');
     movieContainer.classList.add('movie-container');
     movieContainer.classList.add('movie-container--loading');
