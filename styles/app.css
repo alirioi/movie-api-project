@@ -419,6 +419,7 @@ footer {
 
   & a {
     color: var(--secondary-color);
+    display: contents;
     font-size: var(--medium);
     text-decoration: none;
   }
