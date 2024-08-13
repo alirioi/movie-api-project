@@ -1,15 +1,13 @@
 const instance = axios.create({
-  baseURL: 'https://api.themoviedb.org/3/',
+  baseURL: URL_BASE,
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
   params: {
     language: 'es-MX',
+    page: 1,
   },
 });
-
-const URL_IMG = 'https://image.tmdb.org/t/p/w300';
-const URL_IMG_BACKGROUND = 'https://image.tmdb.org/t/p/w1280/';
 
 //Utils
 const options = {
@@ -29,8 +27,11 @@ const lazyLoader = new IntersectionObserver((entries, observer) => {
   });
 }, options);
 
-function renderMovies(movies, container) {
-  container.innerHTML = '';
+function renderMovies(movies, container, clean = true) {
+  if (clean) {
+    container.innerHTML = '';
+  }
+
   movies.forEach((movie) => {
     const movieContainer = document.createElement('div');
     movieContainer.classList.add('movie-container');
@@ -133,7 +134,7 @@ function skeletonLoaderMovieDetailRemove() {
 
 async function getTrendingMoviesPreview() {
   try {
-    const { data } = await instance('/trending/movie/day');
+    const { data } = await instance(URL_TRENDING);
     const movies = data.results;
 
     renderMovies(movies, trendingMoviesPreviewList);
@@ -145,7 +146,7 @@ async function getTrendingMoviesPreview() {
 
 async function getCategoriesPreview() {
   try {
-    const { data } = await instance('/genre/movie/list');
+    const { data } = await instance(URL_CATEGORIES_PREVIEW);
     const categories = data.genres;
 
     renderCategories(categories, categoriesPreviewList);
@@ -157,15 +158,16 @@ async function getCategoriesPreview() {
 
 async function getMoviesByCategory(id) {
   try {
-    skeletonLoaderMovies(genericSection);
-    const { data } = await instance('/discover/movie', {
-      params: {
-        with_genres: id,
-      },
-    });
-    const movies = data.results;
+    if (page === 1) {
+      skeletonLoaderMovies(genericSection);
+    }
 
-    renderMovies(movies, genericSection);
+    const { data } = await instance(URL_CATEGORY(id));
+
+    const movies = data.results;
+    maxPage = data.total_pages;
+
+    renderMovies(movies, genericSection, page === 1);
   } catch (error) {
     alert(error);
     console.log(error);
@@ -174,12 +176,16 @@ async function getMoviesByCategory(id) {
 
 async function getMovieBySearch(query) {
   try {
-    const { data } = await instance('/search/movie', {
-      params: {
-        query,
-      },
-    });
+    if (page === 1) {
+      skeletonLoaderMovies(genericSection);
+    }
+
+    const { data } = await instance(URL_SEARCH(query));
+
     const movies = data.results;
+    maxPage = data.total_pages;
+    console.log(maxPage);
+
     if (movies.length === 0) {
       genericSection.innerHTML = `<h2>No se encontraron resultados para la búsqueda</h2>`;
     } else {
@@ -193,18 +199,49 @@ async function getMovieBySearch(query) {
 
 async function getTrendingMovies() {
   try {
-    skeletonLoaderMovies(genericSection);
-    let movies = [];
-    for (let i = 1; i <= 3; i++) {
-      const { data } = await instance('/trending/movie/day', {
-        params: {
-          page: i,
-        },
-      });
-      movies = movies.concat(data.results);
+    if (page === 1) {
+      skeletonLoaderMovies(genericSection);
     }
 
-    renderMovies(movies, genericSection);
+    const { data } = await instance(URL_TRENDING);
+
+    const movies = data.results;
+    maxPage = data.total_pages;
+
+    renderMovies(movies, genericSection, page === 1);
+  } catch (error) {
+    alert(error);
+    console.log(error);
+  }
+}
+
+async function getPaginatedMovies(endpoint) {
+  try {
+    const scrollIsBottom =
+      genericSection.scrollTop + genericSection.clientHeight >=
+      genericSection.scrollHeight - 15;
+    let isMaxPageReached = false;
+    if (scrollIsBottom && page < maxPage) {
+      page++;
+      const { data } = await instance(endpoint, {
+        params: {
+          page,
+        },
+      });
+
+      const movies = data.results;
+      renderMovies(movies, genericSection, page === 1);
+    } else if (page === maxPage && !isMaxPageReached) {
+      isMaxPageReached = true;
+
+      if (!document.querySelector('.max-page-reached')) {
+        console.log('No más resultados');
+        const maxPageReached = document.createElement('h2');
+        maxPageReached.textContent = 'No hay más resultados 😟';
+        maxPageReached.classList.add('max-page-reached');
+        genericSection.appendChild(maxPageReached);
+      }
+    }
   } catch (error) {
     alert(error);
     console.log(error);
@@ -214,7 +251,7 @@ async function getTrendingMovies() {
 async function getMovieById(id) {
   try {
     skeletonLoaderMovieDetail();
-    const { data: movie } = await instance(`/movie/${id}`);
+    const { data: movie } = await instance(URL_MOVIE(id));
     headerBackgroundImg.src = `${URL_IMG_BACKGROUND}${movie.poster_path}`;
     headerBackgroundImg.alt = movie.title;
 
@@ -223,11 +260,9 @@ async function getMovieById(id) {
       movie.release_date !== undefined &&
       movie.release_date !== ''
     ) {
-      movieDetailTitle.textContent = `${movie.title} (${
-        movie.release_date.split('-')[0]
-      })`;
-    } else {
-      movieDetailTitle.textContent = movie.title;
+      movieDetailTitle.appendChild(
+        document.createTextNode(` (${movie.release_date.split('-')[0]})`)
+      );
     }
 
     movieDetailScore.textContent = parseFloat(movie.vote_average).toFixed(1);
@@ -253,7 +288,7 @@ async function getMovieById(id) {
 async function getRelatedMoviesId(id) {
   try {
     skeletonLoaderMovies(relatedMoviesContainer);
-    const { data: movies } = await instance(`/movie/${id}/similar`);
+    const { data: movies } = await instance(URL_RELATED_MOVIES(id));
 
     renderMovies(movies.results, relatedMoviesContainer);
   } catch (error) {

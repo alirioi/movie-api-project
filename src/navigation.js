@@ -1,3 +1,7 @@
+let page = 1;
+let maxPage;
+let infiniteScroll;
+
 searchFormBtn.addEventListener('click', (e) => {
   if (searchFormInput.value.length > 0) {
     location.hash = '#search=' + searchFormInput.value;
@@ -11,8 +15,16 @@ arrowBtn.addEventListener('click', () => (location.hash = '#home'));
 
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
+// genericSection.addEventListener('scroll', infiniteScroll, false);
 
 function navigator() {
+  // if (infiniteScroll) {
+  //   genericSection.removeEventListener('scroll', infiniteScroll, {
+  //     passive: false,
+  //   });
+  //   infiniteScroll = undefined;
+  // }
+
   location.hash.startsWith('#trends')
     ? trendsPage()
     : location.hash.startsWith('#search=')
@@ -24,6 +36,12 @@ function navigator() {
     : homePage();
 
   genericSection.scrollTop = 0;
+
+  // if (infiniteScroll) {
+  //   genericSection.addEventListener('scroll', infiniteScroll, {
+  //     passive: false,
+  //   });
+  // }
 }
 
 function homePage() {
@@ -45,6 +63,8 @@ function homePage() {
   categoriesPreviewList.scrollLeft = 0;
   getTrendingMoviesPreview();
   getCategoriesPreview();
+  page = 1;
+  maxPage = 0;
 }
 
 function trendsPage() {
@@ -64,6 +84,9 @@ function trendsPage() {
 
   headerCategoryTitle.innerHTML = 'Tendencias';
   getTrendingMovies();
+
+  page = 1;
+  genericSection.onscroll = () => getPaginatedMovies(URL_TRENDING);
 }
 
 function searchPage() {
@@ -83,7 +106,9 @@ function searchPage() {
 
   const query = decodeURI(location.hash.split('=')[1]);
   headerCategoryTitle.innerHTML = `Buscaste: "${query}"`;
+  page = 1;
   getMovieBySearch(query);
+  genericSection.onscroll = () => getPaginatedMovies(URL_SEARCH(query));
 }
 
 function movieDetailsPage() {
@@ -105,7 +130,9 @@ function movieDetailsPage() {
 
   const [_, movieData] = location.hash.split('=');
   const [movieId, movieTitle] = movieData.split('-').map(decodeURI);
+
   getMovieById(movieId);
+  movieDetailTitle.textContent = movieTitle;
 }
 
 function categoriesPage() {
@@ -126,5 +153,7 @@ function categoriesPage() {
   const [_, categoryData] = location.hash.split('=');
   const [categoryId, categoryName] = categoryData.split('-');
 
+  page = 1;
   getMoviesByCategory(categoryId);
+  genericSection.onscroll = () => getPaginatedMovies(URL_CATEGORY(categoryId));
 }

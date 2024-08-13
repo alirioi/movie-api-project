@@ -397,6 +397,14 @@ main {
   overflow-y: scroll;
 }
 
+.max-page-reached {
+  color: var(--secondary-color);
+  font-weight: var(--medium);
+  margin: 10px;
+  order: 100;
+  text-align: center;
+}
+
 /* Footer */
 footer {
   align-items: center;
