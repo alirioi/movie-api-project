@@ -234,7 +234,7 @@ async function getPaginatedMovies(endpoint) {
     } else if (page === maxPage && !isMaxPageReached) {
       isMaxPageReached = true;
 
-      if (!document.querySelector('.max-page-reached')) {
+      if (!$('.max-page-reached')) {
         console.log('No más resultados');
         const maxPageReached = document.createElement('h2');
         maxPageReached.textContent = 'No hay más resultados 😟';

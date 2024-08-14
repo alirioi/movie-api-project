@@ -1,6 +1,5 @@
 let page = 1;
 let maxPage;
-let infiniteScroll;
 
 searchFormBtn.addEventListener('click', (e) => {
   if (searchFormInput.value.length > 0) {
@@ -15,16 +14,8 @@ arrowBtn.addEventListener('click', () => (location.hash = '#home'));
 
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
-// genericSection.addEventListener('scroll', infiniteScroll, false);
 
 function navigator() {
-  // if (infiniteScroll) {
-  //   genericSection.removeEventListener('scroll', infiniteScroll, {
-  //     passive: false,
-  //   });
-  //   infiniteScroll = undefined;
-  // }
-
   location.hash.startsWith('#trends')
     ? trendsPage()
     : location.hash.startsWith('#search=')
@@ -36,12 +27,6 @@ function navigator() {
     : homePage();
 
   genericSection.scrollTop = 0;
-
-  // if (infiniteScroll) {
-  //   genericSection.addEventListener('scroll', infiniteScroll, {
-  //     passive: false,
-  //   });
-  // }
 }
 
 function homePage() {
@@ -152,7 +137,6 @@ function categoriesPage() {
 
   const [_, categoryData] = location.hash.split('=');
   const [categoryId, categoryName] = categoryData.split('-');
-
   page = 1;
   getMoviesByCategory(categoryId);
   genericSection.onscroll = () => getPaginatedMovies(URL_CATEGORY(categoryId));
