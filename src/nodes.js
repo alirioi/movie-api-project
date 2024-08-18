@@ -15,16 +15,21 @@ const URL_IMG_BACKGROUND = 'https://image.tmdb.org/t/p/w1280/';
 const headerSection = $('#header');
 const trendingPreviewSection = $('#trendingPreview');
 const categoriesPreviewSection = $('#categoriesPreview');
+const likedSection = $('#liked');
 const genericSection = $('#genericList');
 const movieDetailSection = $('#movieDetail');
+const movieDetailSectionHeader = $('#movieDetail .movieDetail-header');
 const footerSection = $('footer');
 
 //* List & Containers
 const searchForm = $('#searchForm');
 const trendingMoviesPreviewList = $('.trendingPreview-movieList');
 const categoriesPreviewList = $('.categoriesPreview-list');
+const likedMoviesListContainer = $('.liked-movieList');
 const movieDetailCategoriesList = $('#movieDetail .categories-list');
 const relatedMoviesContainer = $('.relatedMovies-scrollContainer');
+const movieDetailTitleContainer = $('.movieDetailTitle-container');
+const movieDetailBtnContainer = $('.movieDetailBtn-container');
 
 //* Elements
 const headerTitle = $('.header-title');
@@ -38,3 +43,4 @@ const trendingBtn = $('.trendingPreview-button');
 const movieDetailTitle = $('.movieDetail-title');
 const movieDetailDescription = $('.movieDetail-description');
 const movieDetailScore = $('.movieDetail-score');
+// const languageSelect = $('#language');
