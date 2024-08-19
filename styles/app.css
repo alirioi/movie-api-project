@@ -317,6 +317,7 @@ input:focus::placeholder {
 
 .movie-score {
   color: var(--primary-color);
+  filter: drop-shadow(2px 4px 6px black);
   font-weight: var(--bold);
   font-size: 12px;
   padding: 4px 8px;
@@ -342,6 +343,7 @@ input:focus::placeholder {
 
 .movieDefault-title {
   color: var(--secondary-color);
+  filter: drop-shadow(2px 4px 6px black);
   font-weight: var(--medium);
   left: 0;
   padding: 0 10px;
@@ -408,6 +410,7 @@ input:focus::placeholder {
 
 .movieDetail-title {
   color: var(--secondary-color);
+  filter: drop-shadow(2px 4px 6px black);
   font-weight: var(--bold);
   display: inline-block;
   padding: 0;
@@ -416,6 +419,7 @@ input:focus::placeholder {
 .movieDetail-score {
   color: var(--primary-color);
   display: inline-block;
+  filter: drop-shadow(2px 4px 6px black);
   font-weight: var(--bold);
   order: 3;
   text-align: right;
@@ -426,6 +430,7 @@ input:focus::placeholder {
 }
 
 .movieDetail-description {
+  filter: drop-shadow(2px 4px 6px black);
   font-size: 12px;
   font-weight: var(--regular);
   text-align: justify;
