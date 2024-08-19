@@ -192,7 +192,6 @@ const languages = [
 ];
 
 const elementsToTranslate = {
-  searchInputPlaceholder: searchFormInput.placeholder,
   trendingPreviewTitle: trendingPreviewTitle,
   trendingBtn: trendingBtn,
   categoriesPreviewTitle: categoriesPreviewTitle,
