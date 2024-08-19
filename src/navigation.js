@@ -143,7 +143,7 @@ function movieDetailsPage() {
   relatedMoviesContainer.scrollLeft = 0;
 
   const [_, movieData] = location.hash.split('=');
-  const [movieId, movieTitle] = movieData.split('-').map(decodeURI);
+  const [movieId, movieTitle] = movieData.split('+').map(decodeURI);
   page = 1;
   getMovieById(movieId);
   movieDetailTitle.textContent = movieTitle;

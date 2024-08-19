@@ -72,7 +72,7 @@ function renderMovies(movies, container, clean = true) {
     movieImage.setAttribute('data-img', `${URL_IMG}${movie.poster_path}`);
 
     movieImage.addEventListener('click', () => {
-      location.hash = `#movie=${movie.id}-${movie.title}`;
+      location.hash = `#movie=${movie.id}+${movie.title}`;
       skeletonLoaderCategories(movieDetailCategoriesList);
     });
 
