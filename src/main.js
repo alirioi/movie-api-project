@@ -198,7 +198,7 @@ function getTranslation() {
     Object.keys(elementsToTranslate).forEach((key) => {
       elementsToTranslate[key].textContent = currentLanguage[key];
     });
-
+    searchFormInput.placeholder = currentLanguage.searchInputPlaceholder;
     footerText.innerHTML = currentLanguage.footer;
   }
 }
