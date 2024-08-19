@@ -12,15 +12,15 @@ trendingBtn.addEventListener('click', () => (location.hash = '#trends'));
 
 arrowBtn.addEventListener('click', () => (location.hash = '#home'));
 
-// languageSelect.addEventListener('change', (e) => {
-//   language = e.target.value;
-//   navigator();
-// });
+languageSelect.addEventListener('change', () => {
+  language = languageSelect.value;
+  homePage();
+});
 
-window.addEventListener('DOMContentLoaded', navigator, false);
-window.addEventListener('hashchange', navigator, false);
+window.addEventListener('DOMContentLoaded', navigatorPage, false);
+window.addEventListener('hashchange', navigatorPage, false);
 
-function navigator() {
+function navigatorPage() {
   location.hash.startsWith('#trends')
     ? trendsPage()
     : location.hash.startsWith('#search=')
@@ -38,7 +38,7 @@ function homePage() {
   headerSection.classList.remove('header-container--long');
   headerBackground.classList.add('inactive');
   headerBackgroundImg.classList.add('inactive');
-  // languageSelect.classList.remove('inactive');
+  languageSelect.classList.remove('inactive');
   arrowBtn.classList.add('inactive');
   headerTitle.classList.remove('inactive');
   headerCategoryTitle.classList.add('inactive');
@@ -55,6 +55,7 @@ function homePage() {
   trendingMoviesPreviewList.scrollLeft = 0;
   categoriesPreviewList.scrollLeft = 0;
   likedMoviesListContainer.scrollLeft = 0;
+  getTranslation();
   getTrendingMoviesPreview();
   getCategoriesPreview();
   getLikedMovies();
@@ -66,7 +67,7 @@ function trendsPage() {
   headerSection.classList.remove('header-container--long');
   headerBackground.classList.add('inactive');
   headerBackgroundImg.classList.add('inactive');
-  // languageSelect.classList.add('inactive');
+  languageSelect.classList.add('inactive');
   arrowBtn.classList.remove('inactive');
   headerTitle.classList.add('inactive');
   headerCategoryTitle.classList.remove('inactive');
@@ -79,7 +80,12 @@ function trendsPage() {
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
 
-  headerCategoryTitle.innerHTML = 'Tendencias';
+  const currentLanguage = languages.find(
+    (lang) => lang.langSelect === language
+  );
+
+  headerCategoryTitle.innerHTML = `${currentLanguage.search}`;
+
   getTrendingMovies();
 
   page = 1;
@@ -90,7 +96,7 @@ function searchPage() {
   headerSection.classList.remove('header-container--long');
   headerBackground.classList.add('inactive');
   headerBackgroundImg.classList.add('inactive');
-  // languageSelect.classList.add('inactive');
+  languageSelect.classList.add('inactive');
   arrowBtn.classList.remove('inactive');
   headerTitle.classList.add('inactive');
   headerCategoryTitle.classList.remove('inactive');
@@ -104,7 +110,13 @@ function searchPage() {
   movieDetailSection.classList.add('inactive');
 
   const query = decodeURI(location.hash.split('=')[1]);
-  headerCategoryTitle.innerHTML = `Buscaste: "${query}"`;
+
+  const currentLanguage = languages.find(
+    (lang) => lang.langSelect === language
+  );
+
+  headerCategoryTitle.innerHTML = `${currentLanguage.search}: "${query}"`;
+
   page = 1;
   getMovieBySearch(query);
   genericSection.onscroll = () => getPaginatedMovies(URL_SEARCH(query));
@@ -114,7 +126,7 @@ function movieDetailsPage() {
   headerSection.classList.add('header-container--long');
   headerBackground.classList.remove('inactive');
   headerBackgroundImg.classList.remove('inactive');
-  // languageSelect.classList.add('inactive');
+  languageSelect.classList.add('inactive');
   arrowBtn.classList.remove('inactive');
   headerTitle.classList.add('inactive');
   headerCategoryTitle.classList.add('inactive');
@@ -141,7 +153,7 @@ function categoriesPage() {
   headerSection.classList.remove('header-container--long');
   headerBackground.classList.add('inactive');
   headerBackgroundImg.classList.add('inactive');
-  // languageSelect.classList.add('inactive');
+  languageSelect.classList.add('inactive');
   arrowBtn.classList.remove('inactive');
   headerTitle.classList.add('inactive');
   headerCategoryTitle.classList.remove('inactive');

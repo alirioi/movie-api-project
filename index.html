@@ -10,22 +10,22 @@
   <body>
     <header id="header" class="header-container">
       <span class="header-arrow inactive">&lt;</span>
-      <!-- <select name="language" id="language">
-        <option value="es-MX">ES</option>
+      <select name="language" id="language">
+        <option value="es-MX" selected>ES</option>
         <option value="us-EN">EN</option>
-      </select> -->
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="it">IT</option>
+        <option value="pt-BR">PT</option>
+      </select>
       <h1 class="header-title">Movies APP</h1>
-      <h2 class="header-title header-title--categoryView inactive">Acción</h2>
+      <h2 class="header-title header-title--categoryView inactive"></h2>
 
       <form id="searchForm" class="header-searchForm">
         <button id="searchBtn">
           <img src="./styles/icons/search.svg" alt="search" />
         </button>
-        <input
-          type="search"
-          placeholder="Películas, series y más..."
-          id="searchInput"
-        />
+        <input type="search" placeholder="" id="searchInput" />
       </form>
       <div class="header-background inactive"></div>
       <img src="" alt="" class="header-background-img inactive" />
@@ -33,8 +33,8 @@
     <main>
       <section id="trendingPreview" class="trendingPreview-container">
         <div class="trendingPreview-header">
-          <h2 class="trendingPreview-title">Tendencias</h2>
-          <button class="trendingPreview-button">Ver más</button>
+          <h2 class="trendingPreview-title"></h2>
+          <button class="trendingPreview-button"></button>
         </div>
 
         <article class="trendingPreview-movieList">
@@ -48,7 +48,7 @@
       </section>
 
       <section id="categoriesPreview" class="categoriesPreview-container">
-        <h2 class="categoriesPreview-title">Categorías</h2>
+        <h2 class="categoriesPreview-title"></h2>
 
         <article class="categoriesPreview-list">
           <div class="category-container category-container--loading"></div>
@@ -62,7 +62,7 @@
       </section>
 
       <section id="liked" class="liked-container">
-        <h2 class="liked-title">Películas favoritas</h2>
+        <h2 class="liked-title"></h2>
         <article class="liked-movieList">
           <div class="movie-container movie-container--loading"></div>
           <div class="movie-container movie-container--loading"></div>
@@ -123,16 +123,7 @@
       </section>
     </main>
     <footer>
-      <p>
-        Desarrollado por
-        <span> Alirio Isea &copy; 2024 </span><br />
-        Powered by
-        <a
-          href="https://developer.themoviedb.org/docs/getting-started"
-          target="_blank"
-          >TMDb API</a
-        >
-      </p>
+      <p id="footer"></p>
       <div class="contact">
         <a href="https://www.instagram.com/alirioi/" target="_blank">
           <img

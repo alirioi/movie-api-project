@@ -26,7 +26,6 @@ function likedMoviesList() {
 
 function likeMovie(movie) {
   const likedMovies = likedMoviesList();
-  console.log(likedMovies);
 
   if (likedMovies[movie.id]) {
     likedMovies[movie.id] = undefined;
@@ -189,6 +188,18 @@ function skeletonLoaderMovieDetailRemove() {
   movieDetailDescription.classList.remove('movieDetail-description--loading');
 }
 
+function getTranslation() {
+  const currentLanguage = languages.find(
+    (lang) => lang.langSelect === language
+  );
+
+  if (currentLanguage) {
+    Object.keys(elementsToTranslate).forEach((key) => {
+      elementsToTranslate[key].textContent = currentLanguage[key];
+    });
+  }
+}
+
 // Llamadas a la API
 
 async function getTrendingMoviesPreview() {
@@ -262,7 +273,11 @@ async function getMovieBySearch(query) {
     console.log(maxPage);
 
     if (movies.length === 0) {
-      genericSection.innerHTML = `<h2>No se encontraron resultados para la búsqueda</h2>`;
+      const currentLanguage = languages.find(
+        (lang) => lang.langSelect === language
+      );
+
+      genericSection.innerHTML = `<h2>${currentLanguage.noResults}</h2>`;
     } else {
       renderMovies(movies, genericSection);
     }
@@ -315,9 +330,14 @@ async function getPaginatedMovies(endpoint) {
       isMaxPageReached = true;
 
       if (!$('.max-page-reached')) {
-        console.log('No más resultados');
         const maxPageReached = document.createElement('h2');
-        maxPageReached.textContent = 'No hay más resultados 😟';
+
+        const currentLanguage = languages.find(
+          (lang) => lang.langSelect === language
+        );
+
+        maxPageReached.innerHTML = `${currentLanguage.maxPageReachedText}`;
+
         maxPageReached.classList.add('max-page-reached');
         genericSection.appendChild(maxPageReached);
       }
@@ -363,7 +383,11 @@ async function getMovieById(id) {
     ) {
       movieDetailDescription.textContent = movie.overview;
     } else {
-      movieDetailDescription.textContent = 'No hay descripción disponible';
+      const currentLanguage = languages.find(
+        (lang) => lang.langSelect === language
+      );
+
+      movieDetailDescription.innerHTML = `${currentLanguage.noDescription}`;
     }
 
     if (movieDetailSectionHeader.querySelector('.movie-btn') === null) {
@@ -404,7 +428,11 @@ function getLikedMovies() {
     likedMoviesListContainer.innerHTML = '';
     const noMoviesLiked = document.createElement('span');
     noMoviesLiked.classList.add('no-movies-liked');
-    noMoviesLiked.textContent = 'No has guardado ninguna película.';
+    const currentLanguage = languages.find(
+      (lang) => lang.langSelect === language
+    );
+
+    noMoviesLiked.innerHTML = `${currentLanguage.noMoviesLikedText}`;
     likedMoviesListContainer.appendChild(noMoviesLiked);
   } else {
     renderMovies(moviesArray, likedMoviesListContainer);

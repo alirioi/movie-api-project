@@ -37,10 +37,165 @@ const headerBackground = $('.header-background');
 const headerBackgroundImg = $('.header-background-img');
 const arrowBtn = $('.header-arrow');
 const headerCategoryTitle = $('.header-title--categoryView');
-const searchFormInput = $('#searchForm input');
+const searchFormInput = $('#searchInput');
 const searchFormBtn = $('#searchBtn');
+const trendingPreviewTitle = $('.trendingPreview-title');
 const trendingBtn = $('.trendingPreview-button');
+const categoriesPreviewTitle = $('.categoriesPreview-title');
+const likedMoviesTitle = $('.liked-title');
 const movieDetailTitle = $('.movieDetail-title');
 const movieDetailDescription = $('.movieDetail-description');
 const movieDetailScore = $('.movieDetail-score');
-// const languageSelect = $('#language');
+const languageSelect = $('#language');
+const footerText = $('#footer');
+
+//* Language
+const languages = [
+  {
+    langSelect: 'us-EN',
+    searchInputPlaceholder: 'Movies, TV shows and more...',
+    trendingPreviewTitle: 'Trending Now',
+    trendingBtn: 'View more',
+    categoriesPreviewTitle: 'Categories',
+    likedTitle: 'Favorites movies',
+    noMoviesLikedText: "You haven't saved any movies yet.",
+    search: 'You searched',
+    NoResults: 'No results for the search',
+    maxPageReachedText: 'No more results 😟',
+    noDescription: 'No description available',
+    footer: `<p>
+        Developed by
+        <span> Alirio Isea &copy; 2024 </span><br />
+        Powered by
+        <a
+          href="https://developer.themoviedb.org/docs/getting-started"
+          target="_blank"
+          >TMDb API</a
+        >
+      </p>`,
+  },
+  {
+    langSelect: 'es-MX',
+    searchInputPlaceholder: 'Películas, series y más...',
+    trendingPreviewTitle: 'Tendencias',
+    trendingBtn: 'Ver más',
+    categoriesPreviewTitle: 'Categorías',
+    likedTitle: 'Películas favoritas',
+    noMoviesLikedText: 'No has guardado ninguna película.',
+    search: 'Buscaste',
+    NoResults: 'No hay resultados para la búsqueda',
+    maxPageReachedText: 'No hay más resultados 😟',
+    noDescription: 'No hay descripción disponible',
+    footer: `<p>
+        Desarrollado por
+        <span> Alirio Isea &copy; 2024 </span><br />
+        Powered by
+        <a
+          href="https://developer.themoviedb.org/docs/getting-started"
+          target="_blank"
+          >TMDb API</a
+        >
+      </p>`,
+  },
+  {
+    langSelect: 'fr',
+    searchInputPlaceholder: 'Films, séries et plus...',
+    trendingPreviewTitle: 'Tendances',
+    trendingBtn: 'Voir plus',
+    categoriesPreviewTitle: 'Catégories',
+    likedTitle: 'Films favoris',
+    noMoviesLikedText: "Vous n'avez pas encore enregistré de films.",
+    search: 'Vous avez cherché',
+    NoResults: 'Aucun résultat pour la recherche',
+    maxPageReachedText: 'Plus de résultats 😟',
+    noDescription: 'Aucune description disponible',
+    footer: `<p>
+        Développé par
+        <span> Alirio Isea &copy; 2024 </span><br />
+        Powered by
+        <a
+          href="https://developer.themoviedb.org/docs/getting-started"
+          target="_blank"
+          >TMDb API</a
+        >
+      </p>`,
+  },
+  {
+    langSelect: 'pt-BR',
+    searchInputPlaceholder: 'Filmes, séries e mais...',
+    trendingPreviewTitle: 'Tendências',
+    trendingBtn: 'Ver mais',
+    categoriesPreviewTitle: 'Categorias',
+    likedTitle: 'Filmes favoritos',
+    noMoviesLikedText: 'Você ainda não salvou nenhum filme.',
+    search: 'Você pesquisou',
+    NoResults: 'Nenhum resultado para a pesquisa',
+    maxPageReachedText: 'Não há mais resultados 😟',
+    noDescription: 'Nenhuma descrição disponível',
+    footer: `<p>
+        Desenvolvido por
+        <span> Alirio Isea &copy; 2024 </span><br />
+        Powered by
+        <a
+          href="https://developer.themoviedb.org/docs/getting-started"
+          target="_blank"
+          >TMDb API</a
+        >
+      </p>`,
+  },
+  {
+    langSelect: 'it',
+    searchInputPlaceholder: 'Film, serie e altro...',
+    trendingPreviewTitle: 'Tendenze',
+    trendingBtn: 'Vedi di più',
+    categoriesPreviewTitle: 'Categorie',
+    likedTitle: 'Film preferiti',
+    noMoviesLikedText: 'Non hai ancora salvato nessun film.',
+    search: 'Hai cercato',
+    NoResults: 'Nessun risultato per la ricerca',
+    maxPageReachedText: 'Nessun altro risultato 😟',
+    noDescription: 'Nessuna descrizione disponibile',
+    footer: `<p>
+        Sviluppato da
+        <span> Alirio Isea &copy; 2024 </span><br />
+        Powered by
+        <a
+          href="https://developer.themoviedb.org/docs/getting-started"
+          target="_blank"
+          >TMDb API</a
+        >
+      </p>`,
+  },
+  {
+    langSelect: 'de',
+    searchInputPlaceholder: 'Filme, Serien und mehr...',
+    trendingPreviewTitle: 'Trends',
+    trendingBtn: 'Mehr anzeigen',
+    categoriesPreviewTitle: 'Kategorien',
+    likedTitle: 'Lieblings Filme',
+    noMoviesLikedText: 'Du hast noch keine Filme gespeichert.',
+    search: 'Du hast gesucht',
+    NoResults: 'Keine Ergebnisse für die Suche',
+    maxPageReachedText: 'Keine weiteren Ergebnisse 😟',
+    noDescription: 'Keine Beschreibung verfügbar',
+    footer: `<p>
+        Entwickelt von
+        <span> Alirio Isea &copy; 2024 </span><br />
+        Powered by
+        <a
+          href="https://developer.themoviedb.org/docs/getting-started"
+          target="_blank"
+          >TMDb API</a
+        >
+      </p>`,
+  },
+];
+
+const elementsToTranslate = {
+  searchInputPlaceholder: searchFormInput.placeholder,
+  trendingPreviewTitle: trendingPreviewTitle,
+  trendingBtn: trendingBtn,
+  categoriesPreviewTitle: categoriesPreviewTitle,
+  likedTitle: likedMoviesTitle,
+  footer: footerText.innerHTML,
+};

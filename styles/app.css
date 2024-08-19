@@ -98,6 +98,16 @@ main {
   width: 100%;
 }
 
+#language {
+  background-color: var(--dark-grey1);
+  border: none;
+  border-radius: 8px;
+  color: var(--light-grey1);
+  font-size: 12px;
+  padding: 4px;
+  width: 50px;
+}
+
 .header-title {
   margin: 32px auto;
   text-align: center;
@@ -208,16 +218,6 @@ input:focus::placeholder {
   width: 100%;
 }
 
-/* #language {
-  background-color: var(--dark-grey1);
-  border: none;
-  border-radius: 8px;
-  color: var(--light-grey1);
-  font-size: 12px;
-  padding: 4px;
-  width: 50px;
-} */
-
 /*** Shared ***/
 .trendingPreview-container,
 .liked-container,
@@ -240,7 +240,7 @@ input:focus::placeholder {
   width: 100%;
 }
 
-/*TODO: other scrollbar
+/*? other scrollbar
 .trendingPreview-movieList,
 .relatedMovies-scrollContainer,
 .categoriesPreview-list,
@@ -265,6 +265,7 @@ input:focus::placeholder {
   cursor: pointer;
   font-size: 14px;
   height: 36px;
+  min-width: 100px;
   padding: 0px 24px;
 }
 
@@ -369,6 +370,7 @@ input:focus::placeholder {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 /*** Liked Movies ***/
 .no-movies-liked {
   color: var(--secondary-color);
