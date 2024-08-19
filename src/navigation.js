@@ -84,7 +84,7 @@ function trendsPage() {
     (lang) => lang.langSelect === language
   );
 
-  headerCategoryTitle.innerHTML = `${currentLanguage.search}`;
+  headerCategoryTitle.innerHTML = `${currentLanguage.trendingPreviewTitle}`;
 
   getTrendingMovies();
 
