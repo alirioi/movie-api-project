@@ -1,5 +1,6 @@
 // Data
-let language = 'es-MX';
+let language;
+language = getNavigatorLanguage(language);
 
 const instance = axios.create({
   baseURL: URL_BASE,
@@ -200,6 +201,23 @@ function getTranslation() {
 
     footerText.innerHTML = currentLanguage.footer;
   }
+}
+
+function getNavigatorLanguage(lang) {
+  if (navigator.language) {
+    const navigatorLanguage = navigator.language.split('-')[0];
+    if (navigatorLanguage === 'es') {
+      lang = 'es-MX';
+    } else if (navigatorLanguage === 'pt') {
+      lang = 'pt-BR';
+    } else {
+      lang = navigatorLanguage;
+    }
+  } else {
+    lang = 'es-MX';
+  }
+
+  return lang;
 }
 
 // Llamadas a la API

@@ -52,7 +52,7 @@ const footerText = $('#footer');
 //* Language
 const languages = [
   {
-    langSelect: 'us-EN',
+    langSelect: 'us',
     searchInputPlaceholder: 'Movies, TV shows and more...',
     trendingPreviewTitle: 'Trending Now',
     trendingBtn: 'View more',
