@@ -197,6 +197,8 @@ function getTranslation() {
     Object.keys(elementsToTranslate).forEach((key) => {
       elementsToTranslate[key].textContent = currentLanguage[key];
     });
+
+    footerText.innerHTML = currentLanguage.footer;
   }
 }
 

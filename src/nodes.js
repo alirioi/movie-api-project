@@ -197,5 +197,4 @@ const elementsToTranslate = {
   trendingBtn: trendingBtn,
   categoriesPreviewTitle: categoriesPreviewTitle,
   likedTitle: likedMoviesTitle,
-  footer: footerText.innerHTML,
 };
